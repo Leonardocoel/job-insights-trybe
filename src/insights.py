@@ -3,7 +3,10 @@ import src.jobs as jobs
 
 def get_unique_job_types(path):
     data = jobs.read(path)
-    unique_job_types_list = list({row["job_type"] for row in data})
+    unique_job_types_list = list(
+        dict.fromkeys(row["job_type"] for row in data if row["job_type"] != "")
+    )
+
     return unique_job_types_list
 
 
@@ -26,21 +29,12 @@ def filter_by_job_type(jobs, job_type):
 
 
 def get_unique_industries(path):
-    """Checks all different industries and returns a list of them
+    data = jobs.read(path)
+    unique_industries_list = list(
+        dict.fromkeys(row["industry"] for row in data if row["industry"] != "")
+    )
 
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    list
-        List of unique industries
-    """
-    return []
+    return unique_industries_list
 
 
 def filter_by_industry(jobs, industry):
