@@ -69,21 +69,14 @@ def get_max_salary(path):
 
 
 def get_min_salary(path):
-    """Get the minimum salary of all jobs
+    data = jobs.read(path)
+    min_salary_list = min(
+        int(row["min_salary"])
+        for row in data
+        if row["min_salary"] != "" and row["min_salary"] != "invalid"
+    )
 
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The minimum salary paid out of all job opportunities
-    """
-    pass
+    return min_salary_list
 
 
 def matches_salary_range(job, salary):
